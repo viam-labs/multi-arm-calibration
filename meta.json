@@ -1,0 +1,29 @@
+{
+  "$schema": "https://dl.viam.dev/module.schema.json",
+  "module_id": "viam:multi-arm-calibration",
+  "visibility": "public",
+  "url": "https://github.com/viam-labs/multi-arm-calibration",
+  "description": "Calibrates the rigid transform between the bases of multiple arms in a shared workcell.",
+  "models": [
+    {
+      "api": "rdk:service:generic",
+      "model": "viam:multi-arm-calibration:touch",
+      "short_description": "Touch-based multi-arm base calibration. Each arm touches known features on a shared fixture; results persist to the framesystem.",
+      "markdown_link": "README.md"
+    }
+  ],
+  "applications": null,
+  "markdown_link": "README.md",
+  "entrypoint": "bin/multi-arm-calibration",
+  "first_run": "",
+  "build": {
+    "build": "make module.tar.gz",
+    "setup": "make setup",
+    "path": "module.tar.gz",
+    "arch": [
+      "linux/amd64",
+      "linux/arm64",
+      "darwin/arm64"
+    ]
+  }
+}
