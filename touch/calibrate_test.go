@@ -32,9 +32,12 @@ func TestCalibrateRecoversKnownTransform(t *testing.T) {
 		poseAtPoint(0, 0, 100),
 		poseAtPoint(50, 50, 50),
 	}
+	// wantT is arm-2's pose relative to arm-1. Same physical point P has
+	// coords P_a1 in arm-1's frame and P_a2 = wantT⁻¹ · P_a1 in arm-2's.
+	inv := spatialmath.PoseInverse(wantT)
 	armBTCPs := make([]spatialmath.Pose, len(armATCPs))
 	for i, pose := range armATCPs {
-		armBTCPs[i] = spatialmath.NewPoseFromPoint(spatialmath.TransformPointByPose(wantT, pose.Point()))
+		armBTCPs[i] = spatialmath.NewPoseFromPoint(spatialmath.TransformPointByPose(inv, pose.Point()))
 	}
 
 	p := posesource.NewFake(map[string][]spatialmath.Pose{

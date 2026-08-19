@@ -19,8 +19,8 @@ type poser interface {
 }
 
 // Calibrate drives both arms through their saved touch points, captures each
-// arm's TCP in its own base frame, and returns the rigid transform T such that
-// T · P_armA ≈ P_armB for the shared touch points.
+// arm's TCP in its own base frame, and returns the pose of arms[1] relative to
+// arms[0] — directly usable as arms[1]'s frame block with parent = arms[0].
 func Calibrate(ctx context.Context, cfg *Config, d driver, p poser) (spatialmath.Pose, error) {
 	if len(cfg.Arms) != 2 {
 		return nil, fmt.Errorf("calibrate needs exactly two arms, got %d", len(cfg.Arms))
@@ -35,7 +35,7 @@ func Calibrate(ctx context.Context, cfg *Config, d driver, p poser) (spatialmath
 		points[a.Name] = pts
 	}
 
-	return solver.Solve(points[cfg.Arms[0].Name], points[cfg.Arms[1].Name])
+	return solver.Solve(points[cfg.Arms[1].Name], points[cfg.Arms[0].Name])
 }
 
 func captureArm(ctx context.Context, a ArmConfig, d driver, p poser) ([]r3.Vector, error) {
