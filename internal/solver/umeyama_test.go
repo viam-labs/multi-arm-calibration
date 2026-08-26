@@ -124,7 +124,7 @@ func TestSolveNoisyInputBoundedResidual(t *testing.T) {
 	var maxResidual float64
 	for i, p := range from {
 		predicted := applyPose(got, p)
-		d := math.Sqrt(math.Pow(predicted.X-to[i].X, 2) + math.Pow(predicted.Y-to[i].Y, 2) + math.Pow(predicted.Z-to[i].Z, 2))
+		d := math.Sqrt((predicted.X-to[i].X)*(predicted.X-to[i].X) + (predicted.Y-to[i].Y)*(predicted.Y-to[i].Y) + (predicted.Z-to[i].Z)*(predicted.Z-to[i].Z))
 		if d > maxResidual {
 			maxResidual = d
 		}
