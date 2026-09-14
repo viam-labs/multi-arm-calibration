@@ -8,13 +8,13 @@
     {
       "api": "rdk:service:generic",
       "model": "viam:multi-arm-calibration:touch",
-      "short_description": "Touch-based multi-arm base calibration. Each arm touches known features on a shared fixture; results persist to the framesystem.",
+      "short_description": "Touch-based multi-arm base calibration. Arms touch a shared fixture to compute the base transform.",
       "markdown_link": "README.md"
     },
     {
       "api": "rdk:service:generic",
       "model": "viam:multi-arm-calibration:verify",
-      "short_description": "Measures calibration accuracy by planning both arms to a shared world pose and reporting the actual TCP separation.",
+      "short_description": "Measures calibration accuracy: moves both arms to a shared world pose and reports TCP separation.",
       "markdown_link": "README.md"
     }
   ],
